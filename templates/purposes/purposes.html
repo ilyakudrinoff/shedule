@@ -1,10 +1,26 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-
-</body>
-</html>
+{% extends 'base.html' %}
+{% block title %}
+      Мои Цели
+{% endblock %}
+{% block content %}
+    <h1>Мои Цели</h1>
+    <a href="{% url 'purposes:purpose_create' %}">Создать Цель</a>
+    <table>
+      <tr>
+          <th>Цель</th>
+          <th>Дедлайн</th>
+          <th>Выполнено</th>
+      </tr>
+      {% for purpose in purposes %}
+        <tr {% if not purpose.date_complete %} style="background:#E46C6C;" {% else %} style="background:#78E46C;" {% endif %}>
+            <td><a href="{% url 'purposes:purpose' purpose.pk %}">{{ purpose.name }}</a></td>
+            <td>{{ purpose.deadline|date:"d M Y H:i" }}</td>
+            {% if not purpose.date_complete %}
+                <td>не выполнена</td>
+            {% else %}
+                <td>{{ purpose.date_complete|date:"d M Y H:i" }}</td>
+            {% endif %}
+        </tr>
+      {% endfor %}
+    </table>
+{% endblock %}

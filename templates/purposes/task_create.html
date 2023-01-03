@@ -1,10 +1,35 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-
-</body>
-</html>
+{% extends 'base.html' %}
+{% block title %}
+  {% if form.instance.user %}
+    Редактировать Цель
+    {% else %}
+    Новая Цель
+    {% endif %}
+{% endblock %}
+{% block content %}
+    <div class="plan">
+        <form method="post" action="{% if form.instance.pk %}
+        {% url 'purposes:task_edit' form.instance.pk %}{% else %}
+        {% url 'purposes:task_create' purpose_pk %}{% endif %}" class="form-action" enctype="multipart/form-data">
+        {% csrf_token %}
+        {% for field in form %}
+              {{ field.label_tag }}
+              {% if field.field.required %}
+                <span style="color: red;">*</span>
+              {% endif %}
+          <div>
+          {{ field }}
+          </div>
+        {% endfor %}
+        <div>
+          <button type="submit" class="button-click" style="width:100%">
+            {% if form.instance.user %}
+              Сохранить
+              {% else %}
+              Добавить
+              {% endif %}
+          </button>
+        </div>
+    </form>
+      </div>
+{% endblock %}

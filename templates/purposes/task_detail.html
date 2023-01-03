@@ -1,10 +1,22 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-
-</body>
-</html>
+{% extends 'base.html' %}
+{% block title %}
+    Задача {{task_d.name|truncatechars:30}}
+{% endblock %}
+{% block content %}
+    <ul class="current-task">
+        <li><b>Цель:</b> {{ task_d.purpose.name }}</li>
+        <li><b>Задача:</b> {{ task_d.name }}</li>
+        <li><b>Дедлайн:</b> {{ task_d.deadline|date:"d M Y H:i" }}</li>
+        <li>{{ task_d.description|linebreaks }}</li>
+        {% if task_d.date_complete is None %}
+            <li>
+              <a href="{% url 'purposes:task_edit' task_d.pk %}">
+                  изменить задачу
+              </a>
+            </li>
+            <li>
+                <button type="submit" class="button-click"><a href="{% url 'purposes:task_complete' task_d.pk %}">Выполнил</a></button>
+            </li>
+        {% endif %}
+    </ul>
+{% endblock %}
