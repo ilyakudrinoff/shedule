@@ -1,0 +1,18 @@
+{% load static %}
+<header>
+    <a href="{% url 'purposes:index' %}">Поставил Цель! Добился!</a>
+    {% if user.is_authenticated %}
+        <p> Вы вошли как <b>{{ user.get_full_name }}</b></p>
+        <form action="{% url 'users:logged_out' %}" method="POST">
+            {% csrf_token %}
+            <button type="submit" class="button-click">Выйти</button>
+        </form>
+    {% else %}
+        <form action="{% url 'users:login' %}">
+            <button type="submit" class="button-click">Войти</button>
+        </form>
+        <form action="{% url 'users:signup' %}">
+            <button type="submit" class="button-click">Регистрация</button>
+        </form>
+    {% endif %}
+</header>
