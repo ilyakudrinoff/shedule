@@ -12,16 +12,11 @@ User = get_user_model()
 
 @login_required
 def index(request):
-    return render(request, 'purposes/index.html')
-
-
-@login_required
-def purposes(request):
     purposes_d = Purposes.objects.filter(user=request.user)
     context = {
         'purposes': purposes_d,
     }
-    return render(request, 'purposes/purposes.html', context)
+    return render(request, 'purposes/index.html', context)
 
 
 @login_required

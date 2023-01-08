@@ -1,8 +1,9 @@
 {% load static %}
 <header>
-    <a href="{% url 'purposes:index' %}">Поставил Цель! Добился!</a>
+    <div>
+        <a href="{% url 'purposes:index' %}" style="color:blue;"><span>Поставил Цель!</span> Добейся!</a>
     {% if user.is_authenticated %}
-        <p> Вы вошли как <b>{{ user.get_full_name }}</b></p>
+        <p><b>{{ user.get_full_name }}</b></p>
         <form action="{% url 'users:logged_out' %}" method="POST">
             {% csrf_token %}
             <button type="submit" class="button-click">Выйти</button>
@@ -15,4 +16,14 @@
             <button type="submit" class="button-click">Регистрация</button>
         </form>
     {% endif %}
+    </div>
+    <nav>
+        {% with request.resolver_match.view_name as view_name %}
+        <ul>
+            <li class="{% if view_name == 'purposes:index' %} active {% endif %}"><a href="{% url 'purposes:index' %}">Мои Цели</a></li>
+            <li class="{% if view_name == 'purposes:purpose' %} active {% endif %}"><a href="{% url 'purposes:index' %}">Мои Друзья</a></li>
+            <li class="{% if view_name == 'purposes:purpose' %} active {% endif %}"><a href="{% url 'purposes:index' %}">Мой Отчет</a></li>
+        </ul>
+        {% endwith %}
+    </nav>
 </header>

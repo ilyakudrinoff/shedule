@@ -1,13 +1,27 @@
 {% extends 'base.html' %}
 {% block title %}
-      Поставил Цель! Добился!
+    {{ user.get_full_name }} | Мои Цели
 {% endblock %}
 {% block content %}
-    <nav>
-        <ul>
-            <li><a href="{% url 'purposes:purposes' %}">Мои Цели</a></li>
-            <li>Мои Друзья</li>
-            <li>Мой Отчет</li>
-        </ul>
-    </nav>
+    <div>
+        <a href="{% url 'purposes:purpose_create' %}">Создать Цель</a>
+    </div>
+    <table>
+      <tr>
+          <th>Цель</th>
+          <th>Дедлайн</th>
+          <th>Выполнено</th>
+      </tr>
+      {% for purpose in purposes %}
+        <tr {% if not purpose.date_complete %} style="background:#E46C6C;" {% else %} style="background:#78E46C;" {% endif %}>
+            <td><a href="{% url 'purposes:purpose' purpose.pk %}">{{ purpose.name }}</a></td>
+            <td>{{ purpose.deadline|date:"d M Y H:i" }}</td>
+            {% if not purpose.date_complete %}
+                <td>не выполнена</td>
+            {% else %}
+                <td>{{ purpose.date_complete|date:"d M Y H:i" }}</td>
+            {% endif %}
+        </tr>
+      {% endfor %}
+    </table>
 {% endblock %}
