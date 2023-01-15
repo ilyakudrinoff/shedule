@@ -34,3 +34,17 @@ class Tasks(models.Model):
 
     def __str__(self):
         return f'{self.name}'
+
+
+class Friends(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name='Пользователь')
+    name = models.CharField('Имя друга', max_length=50)
+    link = models.CharField('Ссылка на отчет друга', max_length=100)
+
+    class Meta:
+        verbose_name = 'Друзья'
+        verbose_name_plural = 'Друзья'
+
+    def __str__(self):
+        return f'{self.user.name} добавил {self.name} в друзья'
+

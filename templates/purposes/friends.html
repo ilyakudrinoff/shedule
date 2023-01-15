@@ -1,10 +1,16 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-
-</body>
-</html>
+{% extends 'base.html' %}
+{% block title %}
+    {{ user.get_full_name }} | Мои Друзья
+{% endblock %}
+{% block content %}
+    <div>
+        <a href="{% url 'purposes:friends_add' %}">Добавить друга</a>
+    </div>
+    <table>
+      {% for friend in friends %}
+        <tr>
+            <td><a href="{% url 'purposes:friends' user.pk %}">{{ friend.name }}</a></td>
+        </tr>
+        {% endfor %}
+    </table>
+{% endblock %}

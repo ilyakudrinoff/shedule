@@ -5,8 +5,8 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import get_object_or_404, redirect, render
 from django.contrib.auth import get_user_model
 
-from .forms import TasksForm, PurposesForm
-from .models import Tasks, Purposes
+from .forms import TasksForm, PurposesForm, FriendsForm
+from .models import Tasks, Purposes, Friends
 
 User = get_user_model()
 
@@ -113,16 +113,37 @@ def task_delete(request, task_pk):
 
 
 def friends(request):
-    pass
+    friends_d = Friends.objects.filter(user=request.user)
+    context = {
+        'friends_d': friends_d,
+    }
+    return render(request, 'purposes/friends.html', context)
+
+
+def friends_add(request):
+    form = FriendsForm(request.POST)
+    context = {
+        'form': form,
+    }
+    if form.is_valid() or request.POST:
+        Friends(name=request.POST.get('name'),
+                link=request.POST.get('link')).save()
+        return redirect('purposes:friends')
+    return render(request, 'purposes/friend_add.html', context)
 
 
 def results(request):
-    purposes_r = Purposes.objects.all()
-    df = pd.DataFrame(Purposes.objects.all())
-    # df.sort_values('date_complete')
-    print(purposes_r)
+    purposes_r = Purposes.objects.filter(user=request.user)
 
     context = {
         'purposes': purposes_r,
+    }
+    return render(request, 'purposes/results.html', context)
+
+
+def user_result(request, user_pk):
+    purposes_r = Purposes.objects.filter(user=user_pk)
+    context = {
+        'purposes_r': purposes_r,
     }
     return render(request, 'purposes/results.html', context)

@@ -1,6 +1,6 @@
 from django import forms
 
-from .models import Tasks, Purposes
+from .models import Tasks, Purposes, Friends
 
 
 class PurposesForm(forms.ModelForm):
@@ -17,3 +17,10 @@ class TasksForm(forms.ModelForm):
         fields = ('name', 'description', 'deadline', 'purpose')
         labels = {'purpose': 'Цель', 'name': 'Задача', 'description': 'Описание', 'deadline': 'Дедлайн', }
         widgets = {'deadline': forms.DateInput(attrs={'type': 'datetime-local'})}
+
+
+class FriendsForm(forms.ModelForm):
+    class Meta:
+        model = Friends
+        fields = ('name', 'link',)
+        labels = {'name': 'Имя друга', 'link': 'Ссылка на отчет друга', }
