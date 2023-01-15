@@ -19,10 +19,10 @@
                 </li>
             {% endif %}
         {% else %}
-        <li><b>Выполнено:</b> {{ purpose_d.date_complete|date:"d M Y H:i" }}</li>
+            <li><b>Выполнено:</b> {{ purpose_d.date_complete|date:"d M Y H:i" }}</li>
         {% endif %}
     </ul>
-    <p>{{ purpose_d.description|linebreaks }}</p>
+    <p>{{ purpose_d.description }}</p>
     </div>
     {% if purpose_d.date_complete is None %}
     <div>

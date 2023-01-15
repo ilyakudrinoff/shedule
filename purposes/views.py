@@ -118,12 +118,11 @@ def friends(request):
 
 def results(request):
     purposes_r = Purposes.objects.all()
-    df = pd.DataFrame(purposes_r)
+    df = pd.DataFrame(Purposes.objects.all())
     # df.sort_values('date_complete')
-    print(df.head())
+    print(purposes_r)
 
     context = {
         'purposes': purposes_r,
     }
     return render(request, 'purposes/results.html', context)
-

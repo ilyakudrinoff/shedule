@@ -76,6 +76,7 @@ main ul {
     list-style-type: none;
     border-right: 1px solid black;
     padding-right: 2%;
+    margin-right: 2%;
 }
 
 main ul li {
@@ -87,6 +88,11 @@ main ul li {
     justify-content: space-around;
 }
 
+.current p {
+    text-align: justify;
+    white-space:pre-line;
+    text-transform: none;
+}
 
 table {
     border-collapse: collapse;
