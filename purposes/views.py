@@ -1,4 +1,5 @@
 import datetime
+import pandas as pd
 
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import get_object_or_404, redirect, render
@@ -40,7 +41,7 @@ def purpose_create(request):
         Purposes(name=request.POST.get('name'),
                  description=request.POST.get('description'),
                  deadline=request.POST.get('deadline'), user=request.user).save()
-        return redirect('purposes:purposes')
+        return redirect('purposes:index')
     return render(request, 'purposes/purpose_create.html', context)
 
 
@@ -60,7 +61,7 @@ def purpose_complete(request, purpose_pk):
     purpose_d.date_complete = datetime.datetime.now()
     purpose_d.save()
     Tasks.objects.filter(purpose=Purposes.objects.get(pk=purpose_pk)).delete()
-    return redirect('purposes:purposes')
+    return redirect('purposes:index')
 
 
 @login_required
@@ -84,7 +85,7 @@ def task_create(request, purpose_pk):
               description=request.POST.get('description'),
               deadline=request.POST.get('deadline'),
               purpose=Purposes.objects.get(pk=purpose_pk)).save()
-        return redirect('purposes:purposes')
+        return redirect('purposes:index')
     return render(request, 'purposes/task_create.html', context)
 
 
@@ -96,16 +97,33 @@ def task_edit(request, task_pk):
         context = {'form': form}
         return render(request, 'purposes/task_create.html', context)
     form.save()
-    return redirect('purposes:purposes')
+    return redirect('purposes:index')
 
 
 def task_complete(request, task_pk):
     task_d = get_object_or_404(Tasks, pk=task_pk)
     task_d.date_complete = datetime.datetime.now()
     task_d.save()
-    return redirect('purposes:purposes')
+    return redirect('purposes:index')
 
 
 def task_delete(request, task_pk):
     Tasks(pk=task_pk).delete()
-    return redirect('purposes:purposes')
+    return redirect('purposes:index')
+
+
+def friends(request):
+    pass
+
+
+def results(request):
+    purposes_r = Purposes.objects.all()
+    df = pd.DataFrame(purposes_r)
+    # df.sort_values('date_complete')
+    print(df.head())
+
+    context = {
+        'purposes': purposes_r,
+    }
+    return render(request, 'purposes/results.html', context)
+

@@ -22,7 +22,7 @@
         <ul>
             <li class="{% if view_name == 'purposes:index' %} active {% endif %}"><a href="{% url 'purposes:index' %}">Мои Цели</a></li>
             <li class="{% if view_name == 'purposes:purpose' %} active {% endif %}"><a href="{% url 'purposes:index' %}">Мои Друзья</a></li>
-            <li class="{% if view_name == 'purposes:purpose' %} active {% endif %}"><a href="{% url 'purposes:index' %}">Мой Отчет</a></li>
+            <li class="{% if view_name == 'purposes:results' %} active {% endif %}"><a href="{% url 'purposes:results' %}">Мой Отчет</a></li>
         </ul>
         {% endwith %}
     </nav>

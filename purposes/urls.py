@@ -17,8 +17,8 @@ urlpatterns = [
     path('purposes/tasks/<task_pk>/edit', views.task_edit, name='task_edit'),
     path('purposes/tasks/<task_pk>/delete', views.task_delete, name='task_delete'),
     path('purposes/tasks/<task_pk>/complete', views.task_complete, name='task_complete'),
-    #path('friends/', views.friends, name='friends'),
-    #path('results/', views.results, name='results'),
+    path('friends/', views.friends, name='friends'),
+    path('results/', views.results, name='results'),
 ]
 
 if settings.DEBUG:
