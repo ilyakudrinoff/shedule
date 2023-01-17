@@ -7,9 +7,9 @@
         <a href="{% url 'purposes:friends_add' %}">Добавить друга</a>
     </div>
     <table>
-      {% for friend in friends %}
+      {% for friend in friends_d %}
         <tr>
-            <td><a href="{% url 'purposes:friends' user.pk %}">{{ friend.name }}</a></td>
+            <td><a href="{{ friend.link }}">{{ friend.name }}</a></td>
         </tr>
         {% endfor %}
     </table>

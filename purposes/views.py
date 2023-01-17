@@ -1,5 +1,4 @@
 import datetime
-import pandas as pd
 
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import get_object_or_404, redirect, render
@@ -7,6 +6,7 @@ from django.contrib.auth import get_user_model
 
 from .forms import TasksForm, PurposesForm, FriendsForm
 from .models import Tasks, Purposes, Friends
+from .utils import pie
 
 User = get_user_model()
 
@@ -126,24 +126,20 @@ def friends_add(request):
         'form': form,
     }
     if form.is_valid() or request.POST:
-        Friends(name=request.POST.get('name'),
+        Friends(user=request.user, name=request.POST.get('name'),
                 link=request.POST.get('link')).save()
         return redirect('purposes:friends')
     return render(request, 'purposes/friend_add.html', context)
 
 
-def results(request):
-    purposes_r = Purposes.objects.filter(user=request.user)
-
+def results(request, user_pk):
+    purposes_r = Purposes.objects.filter(user=User.objects.get(pk=user_pk))
+    user = User.objects.get(pk=user_pk)
+    analytic = pie(list(purposes_r.values()))
     context = {
         'purposes': purposes_r,
-    }
-    return render(request, 'purposes/results.html', context)
-
-
-def user_result(request, user_pk):
-    purposes_r = Purposes.objects.filter(user=user_pk)
-    context = {
-        'purposes_r': purposes_r,
+        'user_pk': user_pk,
+        'user': user,
+        'analytic': analytic,
     }
     return render(request, 'purposes/results.html', context)

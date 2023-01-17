@@ -19,8 +19,7 @@ urlpatterns = [
     path('purposes/tasks/<task_pk>/complete', views.task_complete, name='task_complete'),
     path('friends/', views.friends, name='friends'),
     path('friends/add', views.friends_add, name='friends_add'),
-    path('results/', views.results, name='results'),
-    path('<user_pk>/result', views.user_result, name='user_result'),
+    path('<user_pk>/results/', views.results, name='results'),
 ]
 
 if settings.DEBUG:

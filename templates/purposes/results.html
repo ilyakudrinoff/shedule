@@ -1,10 +1,23 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-
-</body>
-</html>
+{% extends 'base.html' %}
+{% block title %}
+    Отчет | {{user.get_full_name}}
+{% endblock %}
+{% block content %}
+    <h1 align="center">Отчет | {{user.get_full_name}}</h1>
+    <div class="analytic">
+        {{ analytic }}
+    </div>
+    <table>
+      {% for purpose in purposes %}
+        <tr {% if not purpose.date_complete %} style="background:#E46C6C;" {% else %} style="background:#78E46C;" {% endif %}>
+            <td>{{ purpose.name }}</td>
+            <td>{{ purpose.deadline|date:"d M Y H:i" }}</td>
+            {% if not purpose.date_complete %}
+                <td>не выполнена</td>
+            {% else %}
+                <td>{{ purpose.date_complete|date:"d M Y H:i" }}</td>
+            {% endif %}
+        </tr>
+      {% endfor %}
+    </table>
+{% endblock %}

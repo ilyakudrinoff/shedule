@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Purposes, Tasks
+from .models import Purposes, Tasks, Friends
 
 
 @admin.register(Tasks)
@@ -16,3 +16,9 @@ class PurposesAdmin(admin.ModelAdmin):
     search_fields = ('name',)
     list_filter = ('deadline', 'date_complete', 'user',)
     empty_value_display = '-пусто-'
+
+
+@admin.register(Friends)
+class FriendsAdmin(admin.ModelAdmin):
+    list_display = ('user', 'name', 'link',)
+    search_fields = ('name',)
