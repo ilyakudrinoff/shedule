@@ -135,11 +135,11 @@ def friends_add(request):
 def results(request, user_pk):
     purposes_r = Purposes.objects.filter(user=User.objects.get(pk=user_pk))
     user = User.objects.get(pk=user_pk)
-    analytic = pie(list(purposes_r.values()))
+    pie1 = pie(list(purposes_r.values()))
     context = {
         'purposes': purposes_r,
         'user_pk': user_pk,
         'user': user,
-        'analytic': analytic,
+        'pie': pie1,
     }
     return render(request, 'purposes/results.html', context)
