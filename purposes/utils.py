@@ -10,3 +10,8 @@ def pie(purposes):
     print(df.head())
     df['count_nocomplete'] = df.apply(lambda x: x.isnull().sum(), axis='columns')
     df['count_complete'] = df.apply(lambda x: x.isnull().mean(), axis='columns')
+    df1 = pd.DataFrame()
+    df1['user'] = df['user_id']
+    df1['c_complete'] = df['count_complete']
+    df1['c_nocomplete'] = df['count_nocomplete']
+    print(df1.head())
