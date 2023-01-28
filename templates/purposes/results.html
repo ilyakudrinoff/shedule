@@ -4,9 +4,6 @@
 {% endblock %}
 {% block content %}
     <h1 align="center">Отчет | {{user.get_full_name}}</h1>
-    <div class="analytic">
-        {{ analytic }}
-    </div>
     <table>
       {% for purpose in purposes %}
         <tr {% if not purpose.date_complete %} style="background:#E46C6C;" {% else %} style="background:#78E46C;" {% endif %}>

@@ -6,7 +6,6 @@ from django.contrib.auth import get_user_model
 
 from .forms import TasksForm, PurposesForm, FriendsForm
 from .models import Tasks, Purposes, Friends
-from .utils import pie
 
 User = get_user_model()
 
@@ -135,11 +134,9 @@ def friends_add(request):
 def results(request, user_pk):
     purposes_r = Purposes.objects.filter(user=User.objects.get(pk=user_pk))
     user = User.objects.get(pk=user_pk)
-    pie1 = pie(list(purposes_r.values()))
     context = {
         'purposes': purposes_r,
         'user_pk': user_pk,
         'user': user,
-        'pie': pie1,
     }
     return render(request, 'purposes/results.html', context)
