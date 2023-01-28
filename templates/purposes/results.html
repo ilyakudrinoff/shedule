@@ -6,7 +6,7 @@
     <h1 align="center">Отчет | {{user.get_full_name}}</h1>
     <table>
       {% for purpose in purposes %}
-        <tr {% if not purpose.date_complete %} style="background:#E46C6C;" {% else %} style="background:#78E46C;" {% endif %}>
+        <tr {% if not purpose.date_complete %} style="background:#E46C6C;" {% elif purpose.date_complete > purpose.deadline %} style="background:#FEFE22;" {% else %} style="background:#78E46C;" {% endif %}>
             <td>{{ purpose.name }}</td>
             <td>{{ purpose.deadline|date:"d M Y H:i" }}</td>
             {% if not purpose.date_complete %}
