@@ -11,7 +11,7 @@ SECRET_KEY = os.getenv("SECRET_KEY")
 
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['schedule.ru', '127.0.0.1']
 
 
 INSTALLED_APPS = [
@@ -61,7 +61,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'u1793832_default',
         'USER': 'u1793832_default',
-        'PASSWORD': '0KX19vXeQRbrl7Q3',
+        'PASSWORD': os.getenv('DATABASE'),
         'HOST': 'localhost',
     }
 }
