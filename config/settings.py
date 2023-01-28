@@ -11,7 +11,7 @@ SECRET_KEY = os.getenv("SECRET_KEY")
 
 DEBUG = True
 
-ALLOWED_HOSTS = ['schedule.ru', '127.0.0.1']
+ALLOWED_HOSTS = ['shedule.site', '127.0.0.1']
 
 
 INSTALLED_APPS = [
