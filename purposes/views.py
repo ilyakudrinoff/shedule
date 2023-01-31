@@ -57,6 +57,7 @@ def purpose_edit(request, purpose_pk):
     return redirect('purposes:purpose', purpose_pk)
 
 
+@login_required
 def purpose_complete(request, purpose_pk):
     purpose_d = get_object_or_404(Purposes, pk=purpose_pk)
     purpose_d.date_complete = datetime.datetime.now()
@@ -101,6 +102,7 @@ def task_edit(request, task_pk):
     return redirect('purposes:index')
 
 
+@login_required
 def task_complete(request, task_pk):
     task_d = get_object_or_404(Tasks, pk=task_pk)
     task_d.date_complete = datetime.datetime.now()
@@ -108,11 +110,13 @@ def task_complete(request, task_pk):
     return redirect('purposes:index')
 
 
+@login_required
 def task_delete(request, task_pk):
     Tasks(pk=task_pk).delete()
     return redirect('purposes:index')
 
 
+@login_required
 def friends(request):
     friends_d = Friends.objects.filter(user=request.user)
     context = {
@@ -121,6 +125,7 @@ def friends(request):
     return render(request, 'purposes/friends.html', context)
 
 
+@login_required
 def friends_add(request):
     form = FriendsForm(request.POST)
     context = {
