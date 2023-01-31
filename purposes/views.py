@@ -59,8 +59,8 @@ def purpose_complete(request, purpose_pk):
     purpose_d = get_object_or_404(Purposes, pk=purpose_pk)
     purpose_d.date_complete = datetime.datetime.now()
     purpose_d.save()
-    Tasks.objects.filter(purpose=Purposes.objects.get(pk=purpose_pk)).delete()
-    return redirect('purposes:index')
+    Tasks.objects.filter(purpose=Purposes.objects.get(pk=purpose_pk)).update(date_complete=datetime.datetime.now())
+    return redirect('purposes:purpose', purpose_pk)
 
 
 @login_required
@@ -84,7 +84,7 @@ def task_create(request, purpose_pk):
               description=request.POST.get('description'),
               deadline=request.POST.get('deadline'),
               purpose=Purposes.objects.get(pk=purpose_pk)).save()
-        return redirect('purposes:index')
+        return redirect('purposes:purpose', purpose_pk)
     return render(request, 'purposes/task_create.html', context)
 
 
