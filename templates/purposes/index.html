@@ -10,12 +10,20 @@
       <tr>
           <th>Цель</th>
           <th>Дедлайн</th>
+          <th>Что сделано</th>
           <th>Выполнено</th>
       </tr>
       {% for purpose in purposes %}
         <tr {% if not purpose.date_complete %} style="background:#E46C6C;"  {% elif purpose.date_complete > purpose.deadline %} style="background:#FEFE22;" {% else %} style="background:#78E46C;" {% endif %}>
             <td><a href="{% url 'purposes:purpose' purpose.pk %}">{{ purpose.name }}</a></td>
             <td>{{ purpose.deadline|date:"d M Y H:i" }}</td>
+            <td>
+                {% for task in tasks %}
+                {% if task.purpose == purpose and task.date_complete %}
+                    {{ task }} <br>
+                {% endif %}
+            {% endfor %}
+            </td>
             {% if not purpose.date_complete %}
                 <td>не выполнена</td>
             {% else %}

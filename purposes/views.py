@@ -13,8 +13,10 @@ User = get_user_model()
 @login_required
 def index(request):
     purposes_d = Purposes.objects.filter(user=request.user)
+    tasks = Tasks.objects.all()
     context = {
         'purposes': purposes_d,
+        'tasks': tasks,
     }
     return render(request, 'purposes/index.html', context)
 
@@ -133,10 +135,12 @@ def friends_add(request):
 
 def results(request, user_pk):
     purposes_r = Purposes.objects.filter(user=User.objects.get(pk=user_pk))
+    tasks = Tasks.objects.all()
     user = User.objects.get(pk=user_pk)
     context = {
         'purposes': purposes_r,
         'user_pk': user_pk,
         'user': user,
+        'tasks': tasks,
     }
     return render(request, 'purposes/results.html', context)
