@@ -3,9 +3,20 @@
     {{ user.get_full_name }} | Мои Цели
 {% endblock %}
 {% block content %}
+<form method="get" action="">
+<div class="filter">
+              <div>
+               {{purpose_filter.form}}
+              </div>
+</div>
+<div>
+                <button type="submit" class="button-click" style="margin-bottom: 1%;">Фильтровать</button>
+              </div>
+</form>
     <div>
         <a href="{% url 'purposes:purpose_create' %}">Создать Цель</a>
     </div>
+
     <table>
       <tr>
           <th>Цель</th>

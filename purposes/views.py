@@ -6,6 +6,7 @@ from django.contrib.auth import get_user_model
 
 from .forms import TasksForm, PurposesForm, FriendsForm
 from .models import Tasks, Purposes, Friends
+from .filters import TasksFilter, PurposesFilter
 
 User = get_user_model()
 
@@ -14,9 +15,12 @@ User = get_user_model()
 def index(request):
     purposes_d = Purposes.objects.filter(user=request.user)
     tasks = Tasks.objects.all()
+    purpose_filter = PurposesFilter(request.GET, queryset=purposes_d)
+    purposes_d = purpose_filter.qs
     context = {
         'purposes': purposes_d,
         'tasks': tasks,
+        'purpose_filter': purpose_filter,
     }
     return render(request, 'purposes/index.html', context)
 
@@ -25,9 +29,12 @@ def index(request):
 def purpose(request, purpose_pk):
     purpose_d = get_object_or_404(Purposes, pk=purpose_pk)
     tasks = Tasks.objects.filter(purpose=purpose_pk)
+    task_filter = PurposesFilter(request.GET, queryset=tasks)
+    tasks = task_filter.qs
     context = {
         'purpose_d': purpose_d,
         'tasks': tasks,
+        'task_filter': task_filter,
     }
     return render(request, 'purposes/purpose_detail.html', context)
 

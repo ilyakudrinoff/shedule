@@ -25,6 +25,16 @@
     <p>{{ purpose_d.description }}</p>
     </div>
     {% if purpose_d.date_complete is None %}
+<form method="get" action="">
+<div class="filter">
+              <div>
+                      {{ task_filter.form }}
+              </div>
+              </div>
+    <div>
+                <button type="submit" class="button-click" style="margin-bottom: 1%;">Фильтровать</button>
+              </div>
+</form>
     <div>
         <a href="{% url 'purposes:task_create' purpose_d.pk %}">Создать Задачу</a>
     </div>
