@@ -4,6 +4,16 @@
 {% endblock %}
 {% block content %}
     <h1 align="center">Отчет | {{user.get_full_name}}</h1>
+<form method="get" action="">
+<div class="filter">
+              <div>
+               {{purpose_filter.form}}
+              </div>
+</div>
+<div>
+                <button type="submit" class="button-click" style="margin-bottom: 1%;">Фильтровать</button>
+              </div>
+</form>
     <table>
         <tr>
           <th>Цель</th>
@@ -11,7 +21,7 @@
             <th>Что сделано</th>
           <th>Выполнено</th>
       </tr>
-      {% for purpose in purposes %}
+      {% for purpose in page_obj %}
         <tr {% if not purpose.date_complete %} style="background:#E46C6C;" {% elif purpose.date_complete > purpose.deadline %} style="background:#FEFE22;" {% else %} style="background:#78E46C;" {% endif %}>
             <td>{{ purpose.name }}</td>
             <td>{{ purpose.deadline|date:"d M Y H:i" }}</td>
@@ -29,5 +39,6 @@
             {% endif %}
         </tr>
       {% endfor %}
+        {% include 'purposes/includes/paginator.html' %}
     </table>
 {% endblock %}

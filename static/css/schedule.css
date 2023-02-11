@@ -222,3 +222,17 @@ footer div {
     justify-content: space-around;
     align-items: center;
 }
+
+/* Paginator */
+.pag-nav ul {
+    display: flex;
+    list-style-type: none;
+    margin: 0 5em 0 5em;
+}
+
+.pag-nav ul li {
+    border: 0.5px solid black;
+    padding: 0.5em;
+    margin: 0.2em;
+    font-size: 0.7em;
+}

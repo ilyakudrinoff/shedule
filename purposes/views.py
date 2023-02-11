@@ -7,6 +7,7 @@ from django.contrib.auth import get_user_model
 from .forms import TasksForm, PurposesForm, FriendsForm
 from .models import Tasks, Purposes, Friends
 from .filters import TasksFilter, PurposesFilter
+from .utils import paginator
 
 User = get_user_model()
 
@@ -18,7 +19,7 @@ def index(request):
     purpose_filter = PurposesFilter(request.GET, queryset=purposes_d)
     purposes_d = purpose_filter.qs
     context = {
-        'purposes': purposes_d,
+        'page_obj': paginator(request, purposes_d),
         'tasks': tasks,
         'purpose_filter': purpose_filter,
     }
@@ -29,11 +30,11 @@ def index(request):
 def purpose(request, purpose_pk):
     purpose_d = get_object_or_404(Purposes, pk=purpose_pk)
     tasks = Tasks.objects.filter(purpose=purpose_pk)
-    task_filter = PurposesFilter(request.GET, queryset=tasks)
+    task_filter = TasksFilter(request.GET, queryset=tasks)
     tasks = task_filter.qs
     context = {
         'purpose_d': purpose_d,
-        'tasks': tasks,
+        'page_obj': paginator(request, tasks),
         'task_filter': task_filter,
     }
     return render(request, 'purposes/purpose_detail.html', context)
@@ -149,10 +150,13 @@ def results(request, user_pk):
     purposes_r = Purposes.objects.filter(user=User.objects.get(pk=user_pk))
     tasks = Tasks.objects.all()
     user = User.objects.get(pk=user_pk)
+    purpose_filter = PurposesFilter(request.GET, queryset=purposes_r)
+    purposes_r = purpose_filter.qs
     context = {
-        'purposes': purposes_r,
+        'page_obj': paginator(request, purposes_r),
         'user_pk': user_pk,
         'user': user,
         'tasks': tasks,
+        'purpose_filter': purpose_filter,
     }
     return render(request, 'purposes/results.html', context)
