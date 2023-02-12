@@ -146,6 +146,7 @@ def friends_add(request):
     return render(request, 'purposes/friend_add.html', context)
 
 
+@login_required
 def results(request, user_pk):
     purposes_r = Purposes.objects.filter(user=User.objects.get(pk=user_pk))
     tasks = Tasks.objects.all()
