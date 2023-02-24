@@ -11,31 +11,36 @@ header div {
     justify-content: space-between;
 }
 
-header nav ul {
+header nav {
     display: flex;
     justify-content: space-around;
     list-style-type: none;
 }
 
-header nav ul li {
+header nav a {
     padding: 1% 3%;
+	border-radius: 3px;
+	color: #838a92;
 }
 
-header nav ul li:hover, .active {
-    background-color: #D3D3D3;
-    font-color: red;
+header nav a:hover, .active {
+    border: 1px solid #65a3be;
+	color: #4e879c;
 }
 
-.button-click{
+.button-click {
     padding: 10px 20px;
     background-color: white;
     border: none;
     cursor: pointer;
     font-size: 16px;
+    border: 1px solid #a4afba;
+	border-radius: 3px;
 }
 
 .button-click:hover {
-    background-color: #D3D3D3;
+    border-color: #65a3be;
+	color: #4e879c;
     }
 
 header a {
@@ -69,7 +74,8 @@ main div a {
 }
 
 main div a:hover {
-    background-color: #D3D3D3;
+    border-color: #65a3be;
+	color: #4e879c;
 }
 
 main ul {
@@ -96,14 +102,16 @@ main ul li {
 
 table {
     border-collapse: collapse;
+    border: 1px solid #dddddd;
 }
 
 th {
-    border: 1px solid black;
+    border: 1px solid #dddddd;
+    background: #efefef;
 }
 
 td {
-    border: 1px solid black;
+    border: 1px solid #dddddd;
     padding: 1%;
 }
 
@@ -111,6 +119,10 @@ td a {
     color: blue;
     text-decoration: none;
     font-size: 20px;
+}
+
+td a:hover {
+	color: #4e879c;
 }
 
 /* Footer */
@@ -192,7 +204,7 @@ footer div {
 }
 
 #id_deadline {
-    margin: 2% 0;
+    margin: 3% 0;
     width: 100%;
     height: 30px;
 }
@@ -235,4 +247,17 @@ footer div {
     padding: 0.5em;
     margin: 0.2em;
     font-size: 0.7em;
+}
+
+.accordion {
+    cursor: pointer;
+}
+
+.panel {
+    display: none;
+}
+
+.panel.active {
+    display: table-row;
+    font-size: 1em;
 }

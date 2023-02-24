@@ -19,11 +19,9 @@
     </div>
     <nav>
         {% with request.resolver_match.view_name as view_name %}
-        <ul>
-            <li class="{% if view_name == 'purposes:index' %} active {% endif %}"><a href="{% url 'purposes:index' %}">Мои Цели</a></li>
-            <li class="{% if view_name == 'purposes:friends' %} active {% endif %}"><a href="{% url 'purposes:friends' %}">Мои Друзья</a></li>
-            <li class="{% if view_name == 'purposes:results' %} active {% endif %}"><a href="{% url 'purposes:results' request.user.pk %}">Мой Отчет</a></li>
-        </ul>
+            <a href="{% url 'purposes:index' %}" class="{% if view_name == 'purposes:index' %} active {% endif %}">Цели</a>
+            <a href="{% url 'purposes:friends' %}" class="{% if view_name == 'purposes:friends' %} active {% endif %}">Сеть контактов</a>
+            <!--<a href="{% url 'purposes:results' request.user.pk %}" class="{% if view_name == 'purposes:results' %} active {% endif %}">Мой Отчет</a>-->
         {% endwith %}
     </nav>
 </header>

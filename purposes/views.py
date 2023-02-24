@@ -71,7 +71,7 @@ def purpose_complete(request, purpose_pk):
     purpose_d.date_complete = datetime.datetime.now()
     purpose_d.save()
     Tasks.objects.filter(purpose=Purposes.objects.get(pk=purpose_pk)).update(date_complete=datetime.datetime.now())
-    return redirect('purposes:purpose', purpose_pk)
+    return redirect('purposes:index')
 
 
 @login_required

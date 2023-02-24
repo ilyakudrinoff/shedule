@@ -8,10 +8,8 @@
               <div>
                {{purpose_filter.form}}
               </div>
+    <button type="submit" class="button-click" style="margin-bottom: 1%;">Применить фильтр</button>
 </div>
-<div>
-                <button type="submit" class="button-click" style="margin-bottom: 1%;">Фильтровать</button>
-              </div>
 </form>
     <div>
         <a href="{% url 'purposes:purpose_create' %}">Создать Цель</a>
@@ -21,27 +19,40 @@
       <tr>
           <th>Цель</th>
           <th>Дедлайн</th>
-          <th>Что сделано</th>
-          <th>Выполнено</th>
       </tr>
       {% for purpose in page_obj %}
-        <tr {% if not purpose.date_complete %} style="background:#E46C6C;"  {% elif purpose.date_complete > purpose.deadline %} style="background:#FEFE22;" {% else %} style="background:#78E46C;" {% endif %}>
-            <td><a href="{% url 'purposes:purpose' purpose.pk %}">{{ purpose.name }}</a></td>
+        <tr class="accordion" {% if not purpose.date_complete %} style="background:#E46C6C;"
+            {% elif purpose.date_complete > purpose.deadline %}
+            style="background:#FEFE22;" {% else %} style="background:#78E46C;" {% endif %}>
+            <td>{{ purpose.name }}</td>
             <td>{{ purpose.deadline|date:"d M Y H:i" }}</td>
+        </tr>
+        <tr class="panel">
             <td>
-                {% for task in tasks %}
+                <b>Описание:</b>
+                <p>
+                     {{ purpose.description }}
+                </p>
+                <b>Что Сделано:</b>
+                <p>
+                    {% for task in tasks %}
                 {% if task.purpose == purpose and task.date_complete %}
                     {{ task }} <br>
                 {% endif %}
             {% endfor %}
+                </p>
+                    </td>
+            <td>
+                {% if purpose.date_complete is None %}
+                    <button type="submit" class="button-click"><a href="{% url 'purposes:purpose_complete' purpose.pk %}">Выполнил</a></button>
+                {% else %}
+                    <b>Выполнено:</b>
+                    <p>{{ purpose.date_complete|date:"d M Y H:i" }}</p>
+                {% endif %}
             </td>
-            {% if not purpose.date_complete %}
-                <td>не выполнена</td>
-            {% else %}
-                <td>{{ purpose.date_complete|date:"d M Y H:i" }}</td>
-            {% endif %}
         </tr>
       {% endfor %}
         {% include 'purposes/includes/paginator.html' %}
     </table>
+<script>accordion();</script>
 {% endblock %}
