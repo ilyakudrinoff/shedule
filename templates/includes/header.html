@@ -9,12 +9,14 @@
             <button type="submit" class="button-click">Выйти</button>
         </form>
     {% else %}
+        <div>
         <form action="{% url 'users:login' %}">
             <button type="submit" class="button-click">Войти</button>
         </form>
         <form action="{% url 'users:signup' %}">
             <button type="submit" class="button-click">Регистрация</button>
         </form>
+            </div>
     {% endif %}
     </div>
     <nav>

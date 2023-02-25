@@ -6,7 +6,12 @@
 <form method="get" action="">
 <div class="filter">
               <div>
-               {{purpose_filter.form}}
+               {{purpose_filter.form.deadline.label_tag}}
+               {{purpose_filter.form.deadline}}
+              </div>
+                <div>
+                    {{purpose_filter.form.date_complete.label_tag}}
+               {{purpose_filter.form.date_complete}}
               </div>
     <button type="submit" class="button-click" style="margin-bottom: 1%;">Применить фильтр</button>
 </div>

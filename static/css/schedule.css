@@ -29,11 +29,12 @@ header nav a:hover, .active {
 }
 
 .button-click {
-    padding: 10px 20px;
+    padding: 0.5em 1em;
+    margin: 1em;
     background-color: white;
     border: none;
     cursor: pointer;
-    font-size: 16px;
+    font-size: 14px;
     border: 1px solid #a4afba;
 	border-radius: 3px;
 }
