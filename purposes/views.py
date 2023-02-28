@@ -72,7 +72,7 @@ def task_create(request, purpose_pk):
               description=request.POST.get('description'),
               deadline=request.POST.get('deadline'),
               purpose=Purposes.objects.get(pk=purpose_pk)).save()
-        return redirect('purposes:purpose', purpose_pk)
+        return redirect('purposes:index')
     return render(request, 'purposes/task_create.html', context)
 
 
