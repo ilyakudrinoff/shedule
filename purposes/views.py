@@ -48,7 +48,7 @@ def purpose_edit(request, purpose_pk):
         context = {'form': form}
         return render(request, 'purposes/purpose_create.html', context)
     form.save()
-    return redirect('purposes:index', purpose_pk)
+    return redirect('purposes:index')
 
 
 @login_required
