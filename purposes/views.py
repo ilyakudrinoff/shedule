@@ -27,20 +27,6 @@ def index(request):
 
 
 @login_required
-def purpose(request, purpose_pk):
-    purpose_d = get_object_or_404(Purposes, pk=purpose_pk)
-    tasks = Tasks.objects.filter(purpose=purpose_pk)
-    task_filter = TasksFilter(request.GET, queryset=tasks)
-    tasks = task_filter.qs
-    context = {
-        'purpose_d': purpose_d,
-        'page_obj': paginator(request, tasks),
-        'task_filter': task_filter,
-    }
-    return render(request, 'purposes/purpose_detail.html', context)
-
-
-@login_required
 def purpose_create(request):
     form = PurposesForm(request.POST)
     context = {
@@ -72,15 +58,6 @@ def purpose_complete(request, purpose_pk):
     purpose_d.save()
     Tasks.objects.filter(purpose=Purposes.objects.get(pk=purpose_pk)).update(date_complete=datetime.datetime.now())
     return redirect('purposes:index')
-
-
-@login_required
-def task(request, task_pk):
-    task_d = get_object_or_404(Tasks, pk=task_pk)
-    context = {
-        'task_d': task_d,
-    }
-    return render(request, 'purposes/task_detail.html', context)
 
 
 @login_required
