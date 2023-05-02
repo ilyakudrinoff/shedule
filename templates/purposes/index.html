@@ -3,6 +3,11 @@
     {{ user.get_full_name }} | Мои Цели
 {% endblock %}
 {% block content %}
+<nav>
+        {% with request.resolver_match.view_name as view_name %}
+            <a href="{% url 'purposes:index' %}" class="{% if view_name == 'purposes:index' %} active {% endif %}">Задачи</a>
+        {% endwith %}
+</nav>
 <form method="get" action="">
 <div class="filter">
               <div>
@@ -22,8 +27,9 @@
 
     <table>
       <tr>
-          <th>Цель</th>
+          <th>Задача</th>
           <th>Дедлайн</th>
+          <th>Исполнено</th>
       </tr>
       {% for purpose in page_obj %}
         <tr class="accordion" {% if not purpose.date_complete %} style="background:#E46C6C;"
@@ -31,9 +37,10 @@
             style="background:#FEFE22;" {% else %} style="background:#78E46C;" {% endif %}>
             <td>{{ purpose.name }}</td>
             <td>{{ purpose.deadline|date:"d M Y H:i" }}</td>
+            <td>{{ purpose.date_complete|date:"d M Y H:i" }}</td>
         </tr>
         <tr class="panel">
-            <td colspan="2">
+            <td colspan="3">
                     <div><p>{{ purpose.description }}</p></div>
                     <div class="current">
                         {% for task in tasks %}
@@ -49,7 +56,7 @@
                             <p>{{ purpose.date_complete|date:"d M Y H:i" }}</p>
                         {% endif %}
                     </div>
-
+                <!--
                 <div class="tasks">
                         {% if purpose.date_complete is None %}
                         <div class="create_purpose">
@@ -87,7 +94,7 @@
                             {% include 'purposes/includes/paginator.html' %}
                         </table>
                         {% endif %}
-                </div>
+                </div>-->
             </td>
         </tr>
       {% endfor %}

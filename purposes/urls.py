@@ -9,15 +9,8 @@ app_name = 'purposes'
 urlpatterns = [
     path('', views.index, name='index'),
     path('purposes/create', views.purpose_create, name='purpose_create'),
-    path('purposes/<purpose_pk>/task/create', views.task_create, name='task_create'),
     path('purposes/<purpose_pk>/edit', views.purpose_edit, name='purpose_edit'),
     path('purposes/<purpose_pk>/complete', views.purpose_complete, name='purpose_complete'),
-    path('purposes/tasks/<task_pk>/edit', views.task_edit, name='task_edit'),
-    path('purposes/tasks/<task_pk>/delete', views.task_delete, name='task_delete'),
-    path('purposes/tasks/<task_pk>/complete', views.task_complete, name='task_complete'),
-    path('friends/', views.friends, name='friends'),
-    path('friends/add', views.friends_add, name='friends_add'),
-    path('<user_pk>/results/', views.results, name='results'),
 ]
 
 if settings.DEBUG:

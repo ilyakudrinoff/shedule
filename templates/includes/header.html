@@ -1,7 +1,6 @@
 {% load static %}
 <header>
     <div>
-        <a href="{% url 'purposes:index' %}" style="color:blue;"><span>Поставил Цель!</span> Добейся!</a>
     {% if user.is_authenticated %}
         <p><b>{{ user.get_full_name }}</b></p>
         <form action="{% url 'users:logged_out' %}" method="POST">
@@ -10,20 +9,7 @@
         </form>
     {% else %}
         <div>
-        <form action="{% url 'users:login' %}">
-            <button type="submit" class="button-click">Войти</button>
-        </form>
-        <form action="{% url 'users:signup' %}">
-            <button type="submit" class="button-click">Регистрация</button>
-        </form>
-            </div>
+        </div>
     {% endif %}
     </div>
-    <nav>
-        {% with request.resolver_match.view_name as view_name %}
-            <a href="{% url 'purposes:index' %}" class="{% if view_name == 'purposes:index' %} active {% endif %}">Цели</a>
-            <a href="{% url 'purposes:friends' %}" class="{% if view_name == 'purposes:friends' %} active {% endif %}">Сеть контактов</a>
-            <!--<a href="{% url 'purposes:results' request.user.pk %}" class="{% if view_name == 'purposes:results' %} active {% endif %}">Мой Отчет</a>-->
-        {% endwith %}
-    </nav>
 </header>

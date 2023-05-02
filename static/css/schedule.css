@@ -11,20 +11,20 @@ header div {
     justify-content: space-between;
 }
 
-header nav {
+nav {
     display: flex;
     justify-content: space-around;
     list-style-type: none;
 }
 
-header nav a {
+nav a {
     padding: 1% 3%;
 	border-radius: 3px;
 	color: #000;
 	border: 1px solid #a4afba;
 }
 
-header nav a:hover {
+nav a:hover {
     border: 1px solid blue;
     color: blue;
 }
