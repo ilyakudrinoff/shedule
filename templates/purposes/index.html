@@ -3,11 +3,7 @@
     {{ user.get_full_name }} | Мои Цели
 {% endblock %}
 {% block content %}
-<nav>
-        {% with request.resolver_match.view_name as view_name %}
-            <a href="{% url 'purposes:index' %}" class="{% if view_name == 'purposes:index' %} active {% endif %}">Задачи</a>
-        {% endwith %}
-</nav>
+{% include 'includes/postheader.html' %}
 <form method="get" action="">
 <div class="filter">
               <div>

@@ -3,7 +3,7 @@ from django import forms
 from .models import Contacts, Relationship, PreMeeting, Facts
 
 
-class PurposesForm(forms.ModelForm):
+class ContactsForm(forms.ModelForm):
     class Meta:
         model = Contacts
         fields = ('name', 'last_name', 'photo', 'status', 'krug', 'sector', 'ois', 'first_info',)

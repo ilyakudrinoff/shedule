@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% block title %}
+    {{ user.get_full_name }} | Факты
+{% endblock %}
+{% block content %}
+{% include 'includes/postheader.html' %}
+<a href="{% url 'contacts:contact_create' %}">Создать контакт</a>
+<table>
+          <tr>
+              <th>Фамилия Имя</th>
+              <th>Статус</th>
+              <th>Круг</th>
+              <th>Сектор</th>
+          </tr>
+          {% for contact in contacts %}
+            <tr>
+                <td><a href="{% url 'contacts:contact_card' contact.pk %}">{{ contact.last_name }} {{ contact.name }}</a></td>
+                <td>{{ contact.status }}</td>
+                <td>{{ contact.krug }}</td>
+                <td>{{ contact.sector }}</td>
+            </tr>
+          {% endfor %}
+</table>
+{% endblock %}

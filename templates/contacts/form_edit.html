@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block title %}
+    {{ user.get_full_name }} | Факты
+{% endblock %}
+{% block content %}
+{% include 'includes/postheader.html' %}
+<form method="post" action="{% url '{{ link }}' form.instance.pk %}" class="form-action" enctype="multipart/form-data">
+            {% csrf_token %}
+              {{ form.as_p }}
+          <button type="submit" class="button-click" style="width:100%">
+              Сохранить
+          </button>
+    </form>
+      </div>
+{% endblock %}

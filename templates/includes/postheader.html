@@ -1,0 +1,6 @@
+<nav>
+        {% with request.resolver_match.view_name as view_name %}
+            <a href="{% url 'purposes:index' %}" class="{% if view_name == 'purposes:index' %} active {% endif %}">Задачи</a>
+            <a href="{% url 'contacts:index' %}" class="{% if view_name == 'contacts:index' %} active {% endif %}">Сеть контактов</a>
+        {% endwith %}
+</nav>

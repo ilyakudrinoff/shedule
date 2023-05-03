@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block title %}
+    {{ user.get_full_name }} | Факты
+{% endblock %}
+{% block content %}
+{% include 'includes/postheader.html' %}
+<form method="post" action="{% url link %}" class="form-action" enctype="multipart/form-data">
+    {% csrf_token %}
+    {% for i in form %}
+        <b>{{ i.label_tag }}</b>
+        {{ i }}
+    {% endfor %}
+    <button type="submit" class="button-click">Сохранить</button>
+</form>
+{% endblock %}

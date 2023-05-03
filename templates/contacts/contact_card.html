@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% block title %}
+    {{ user.get_full_name }} | Факты
+{% endblock %}
+{% block content %}
+{% include 'includes/postheader.html' %}
+<a href="{% url 'contacts:contact_edit' contact.pk %}">Изменить контакт</a>
+<a href="{% url 'contacts:contact_delete' contact.pk %}">Удалить контакт</a>
+<a href="{% url 'contacts:meet_create' contact.pk %}">Подготовить встречу</a>
+<a href="{% url 'contacts:meet_edit' contact.pk %}">Изменить встречу</a>
+<a href="{% url 'contacts:meets' contact.pk %}">Встречи</a>
+<a href="{% url 'contacts:relationship_create' contact.pk %}">Создать отношения</a>
+<a href="{% url 'contacts:relationship_edit' contact.pk %}">Изменить отношения</a>
+<a href="{% url 'contacts:relationships' contact.pk %}">Отношения</a>
+<a href="{% url 'contacts:facts_create' contact.pk %}">Создать факт</a>
+<a href="{% url 'contacts:facts_create' contact.pk %}">Изменить факт</a>
+<a href="{% url 'contacts:facts_create' contact.pk %}">Факты</a>
+<a href="{% url 'contacts:facts_create' contact.pk %}">Создать факт</a>
+{% endblock %}
