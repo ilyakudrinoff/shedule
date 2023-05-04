@@ -4,6 +4,16 @@
 {% endblock %}
 {% block content %}
 {% include 'includes/postheader.html' %}
+{% if contact_pk %}
+<form method="post" action="{% url link contact_pk %}" class="form-action" enctype="multipart/form-data">
+    {% csrf_token %}
+    {% for i in form %}
+        <b>{{ i.label_tag }}</b>
+        {{ i }}
+    {% endfor %}
+    <button type="submit" class="button-click">Сохранить</button>
+</form>
+{% else %}
 <form method="post" action="{% url link %}" class="form-action" enctype="multipart/form-data">
     {% csrf_token %}
     {% for i in form %}
@@ -12,4 +22,5 @@
     {% endfor %}
     <button type="submit" class="button-click">Сохранить</button>
 </form>
+{% endif %}
 {% endblock %}

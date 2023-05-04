@@ -31,6 +31,13 @@ OIS = (
     ('Сложен', 'Сложен'),
 )
 
+MARKS = (
+    ('0', '0'),
+    ('1', '1'),
+    ('2', '2'),
+    ('3', '3'),
+)
+
 
 class Sectors(TimeStampedModel):
     name = models.CharField('Сектор', max_length=50)
@@ -99,8 +106,10 @@ POVEDENIE = (
 
 
 class Relationship(TimeStampedModel):
-    povedenie = models.CharField('Поведение', choices=POVEDENIE, max_length=50)
-    results = models.IntegerField('Результат')
+    commitment_intensity = models.CharField(choices=MARKS, max_length=2)
+    initiative_reciprocity = models.CharField(choices=MARKS, max_length=2)
+    emotional_involment = models.CharField(choices=MARKS, max_length=2)
+    openness_trust = models.CharField(choices=MARKS, max_length=2)
     contact = models.ForeignKey(Contacts, on_delete=models.CASCADE, related_name='ship_contact', verbose_name='Контакт')
 
     class Meta:

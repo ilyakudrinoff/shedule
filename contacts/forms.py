@@ -22,8 +22,10 @@ class PremeetingForm(forms.ModelForm):
 class RelationshipForm(forms.ModelForm):
     class Meta:
         model = Relationship
-        fields = ('povedenie', 'results',)
-        labels = {'povedenie': 'Поведение', 'results': 'Результат'}
+        fields = ('commitment_intensity', 'initiative_reciprocity', 'emotional_involment', 'openness_trust')
+        labels = {'commitment_intensity': 'Приверженность и интенсивность',
+                  'initiative_reciprocity': 'Инициатива и взаимность',
+                  'emotional_involment': 'Эмоциональная вовлеченность',  'openness_trust': 'Открытость и доверие', }
 
 
 class FactsForm(forms.ModelForm):

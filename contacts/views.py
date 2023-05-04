@@ -28,9 +28,16 @@ def contact_create(request):
 
 def contact_card(request, contact_pk):
     contact = Contacts.objects.get(pk=contact_pk)
+    meets_t = PreMeeting.objects.filter(contact=contact)
+    rship_t = Relationship.objects.filter(contact=contact)
+    facts_t = Facts.objects.filter(contact=contact)
+
     context = {
         'contact': contact,
         'contact_pk': contact_pk,
+        'meets': meets_t,
+        'rship': rship_t,
+        'facts': facts_t,
     }
     return render(request, 'contacts/contact_card.html', context)
 
@@ -43,7 +50,7 @@ def contact_edit(request, contact_pk):
         if form.is_valid():
             f = form.save(commit=False)
             f.save()
-            return redirect('contacts:contact_card')
+            return redirect('contacts:contact_card', contact_pk)
     else:
         form = ContactsForm(request.POST, instance=contact)
     return render(request, 'contacts/form_edit.html', {'form': form, 'link': link, })
@@ -59,7 +66,7 @@ def meets(request, contact_pk):
     context = {
         'meets_t': meets_t,
     }
-    render(request, 'contacts/meets.html', context)
+    return render(request, 'contacts/meets.html', context)
 
 
 def meet_create(request, contact_pk):
@@ -68,6 +75,7 @@ def meet_create(request, contact_pk):
     context = {
         'form': form,
         'link': link,
+        'contact_pk': contact_pk,
     }
     if form.is_valid() or request.POST:
         PreMeeting(name=request.POST.get('name'), problem=request.POST.get('problem'), plan=request.POST.get('plan'),
@@ -76,7 +84,7 @@ def meet_create(request, contact_pk):
     return render(request, 'contacts/form_create.html', context)
 
 
-def meet_edit(request, contact_pk, meet_pk):
+def meet_edit(request, meet_pk):
     meet = get_object_or_404(PreMeeting, pk=meet_pk)
     link = 'contacts:meet_edit'
     if request.method == 'POST':
@@ -84,18 +92,10 @@ def meet_edit(request, contact_pk, meet_pk):
         if form.is_valid():
             f = form.save(commit=False)
             f.save()
-            return redirect('contacts:contact_card')
+            return redirect('contacts:contact_card', meet.contact.pk)
     else:
         form = PremeetingForm(request.POST, instance=meet)
     return render(request, 'contacts/form_edit.html', {'form': form, 'link': link, })
-
-
-def relationships(request, contact_pk):
-    relationship_t = Relationship.objects.filter(contact=Contacts.objects.get(pk=contact_pk))
-    context = {
-        'meets_t': relationship_t,
-    }
-    render(request, 'contacts/relationship.html', context)
 
 
 def relationship_create(request, contact_pk):
@@ -104,15 +104,19 @@ def relationship_create(request, contact_pk):
     context = {
         'form': form,
         'link': link,
+        'contact_pk': contact_pk,
     }
     if form.is_valid() or request.POST:
-        Relationship(name=request.POST.get('name'), problem=request.POST.get('problem'), plan=request.POST.get('plan'),
-                     result=request.POST.get('result'), contact=Contacts.objects.get(pk=contact_pk)).save()
+        Relationship(commitment_intensity=request.POST.get('commitment_intensity'),
+                     initiative_reciprocity=request.POST.get('initiative_reciprocity'),
+                     emotional_involment=request.POST.get('emotional_involment'),
+                     openness_trust=request.POST.get('openness_trust'),
+                     contact=Contacts.objects.get(pk=contact_pk)).save()
         return redirect('contacts:contact_card', contact_pk)
     return render(request, 'contacts/form_create.html', context)
 
 
-def relationship_edit(request, contact_pk, relationship_pk):
+def relationship_edit(request, relationship_pk):
     rship = get_object_or_404(PreMeeting, pk=relationship_pk)
     link = 'contacts:relationship_edit'
     if request.method == 'POST':
@@ -120,7 +124,7 @@ def relationship_edit(request, contact_pk, relationship_pk):
         if form.is_valid():
             f = form.save(commit=False)
             f.save()
-            return redirect('contacts:contact_card')
+            return redirect('contacts:contact_card', rship.contact.pk)
     else:
         form = RelationshipForm(request.POST, instance=rship)
     return render(request, 'contacts/form_edit.html', {'form': form, 'link': link, })
@@ -129,9 +133,9 @@ def relationship_edit(request, contact_pk, relationship_pk):
 def facts(request, contact_pk):
     facts_t = Facts.objects.filter(contact=Contacts.objects.get(pk=contact_pk))
     context = {
-        'meets_t': facts_t,
+        'facts_t': facts_t,
     }
-    render(request, 'contacts/facts.html', context)
+    return render(request, 'contacts/facts.html', context)
 
 
 def fact_create(request, contact_pk):
@@ -140,6 +144,7 @@ def fact_create(request, contact_pk):
     context = {
         'form': form,
         'link': link,
+        'contact_pk': contact_pk,
     }
     if form.is_valid() or request.POST:
         Facts(fact=request.POST.get('fact'), contact=Contacts.objects.get(pk=contact_pk)).save()
@@ -155,7 +160,7 @@ def fact_edit(request, contact_pk, fact_pk):
         if form.is_valid():
             f = form.save(commit=False)
             f.save()
-            return redirect('contacts:contact_card')
+            return redirect('contacts:contact_card', fact.contact.pk)
     else:
         form = FactsForm(request.POST, instance=fact)
     return render(request, 'contacts/form_edit.html', {'form': form, 'link': link, })
