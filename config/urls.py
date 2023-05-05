@@ -9,3 +9,5 @@ urlpatterns = [
     path('', include('purposes.urls', namespace='purposes')),
     path('contacts/', include('contacts.urls', namespace='contacts')),
 ]
+from django.contrib.staticfiles.urls import staticfiles_urlpatterns
+urlpatterns += staticfiles_urlpatterns()

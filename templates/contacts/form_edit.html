@@ -4,9 +4,13 @@
 {% endblock %}
 {% block content %}
 {% include 'includes/postheader.html' %}
+<div class="plan">
 <form method="post" action="{% url link form.instance.pk %}" class="form-action" enctype="multipart/form-data">
             {% csrf_token %}
-              {{ form.as_p }}
+            {% for i in form %}
+                <b>{{ i.label_tag }}</b>
+                <div>{{ i }}</div>
+            {% endfor %}
           <button type="submit" class="button-click" style="width:100%">
               Сохранить
           </button>

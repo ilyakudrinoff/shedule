@@ -66,6 +66,24 @@ main {
     margin: 1% 5%;
 }
 
+main > div {
+    display:flex;
+    /*border: 1px solid black;*/
+}
+
+main > div table {
+    margin-left: 3%;
+    border: 1px solid black;
+}
+
+main > div table th {
+    font-size: 1.3em;
+}
+
+main > div table td {
+    font-size: 1.3em;
+}
+
 .create_purpose {
     display: flex;
     justify-content: right;
@@ -142,37 +160,7 @@ footer div {
     flex-basis: 100%;
 }
 
-#id_first_name {
-    margin: 3% 0;
-    height: 30px;
-}
-
-#id_last_name {
-    margin: 3% 0;
-    height: 30px;
-}
-
-#id_email {
-    margin: 3% 0;
-    height: 30px;
-}
-
-#id_username {
-    margin: 3% 0;
-    height: 30px;
-}
-
-#id_password {
-    margin: 3% 0;
-    height: 30px;
-}
-
-#id_password1 {
-    margin: 3% 0;
-    height: 30px;
-}
-
-#id_password2 {
+#id_first_name, #id_last_name, #id_email, #id_username, #id_password, #id_password1, #id_password2 {
     margin: 3% 0;
     height: 30px;
 }
@@ -189,31 +177,21 @@ footer div {
     padding: 1em 30%;
 }
 
-#id_name {
+#id_name, #id_last_name, #id_photo, #id_status, #id_krug, #id_sector, #id_ois, #id_commitment_intensity, #id_initiative_reciprocity,
+ #id_emotional_involment, #id_openness_trust, #id_problem {
     margin: 2% 0;
     width: 100%;
     height: 30px;
 }
 
-#id_description {
+#id_description, #id_first_info, #id_plan, #id_result, #id_fact, #id_what_will_do, #id_how_know_about, #id_what_will_give,
+#id_what_will_get, #id_how_next_meet {
     margin: 2% 0;
     width: 100%;
 }
 
-#id_deadline {
+#id_deadline, #id_purpose, #id_link {
     margin: 3% 0;
-    width: 100%;
-    height: 30px;
-}
-
-#id_purpose {
-    margin: 2% 0;
-    width: 100%;
-    height: 30px;
-}
-
-#id_link {
-    margin: 2% 0;
     width: 100%;
     height: 30px;
 }
@@ -265,4 +243,9 @@ footer div {
 }
 .tasks {
     flex-direction: column;
+}
+
+.img-list {
+     width: 12%;
+    height: 12%;
 }

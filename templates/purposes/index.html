@@ -39,11 +39,6 @@
             <td colspan="3">
                     <div><p>{{ purpose.description }}</p></div>
                     <div class="current">
-                        {% for task in tasks %}
-                            {% if task.purpose == purpose and task.date_complete %}
-                                {{ task }} <br>
-                            {% endif %}
-                        {% endfor %}
                         {% if purpose.date_complete is None %}
                             <a href="{% url 'purposes:purpose_edit' purpose.pk %}">изменить цель</a>
                             <button type="submit" class="button-click"><a href="{% url 'purposes:purpose_complete' purpose.pk %}">Выполнил</a></button>
@@ -52,45 +47,6 @@
                             <p>{{ purpose.date_complete|date:"d M Y H:i" }}</p>
                         {% endif %}
                     </div>
-                <!--
-                <div class="tasks">
-                        {% if purpose.date_complete is None %}
-                        <div class="create_purpose">
-                            <a href="{% url 'purposes:task_create' purpose.pk %}">Создать Задачу</a>
-                        </div>
-                        <table>
-                            <tr>
-                              <th>Задача</th>
-                              <th>Выполнено</th>
-                            </tr>
-                            {% for task in tasks %}
-                                {% if task.purpose == purpose %}
-                                <tr class="accordion" {% if not task.date_complete %} style="background:#E46C6C;" {% else %} style="background:#78E46C;" {% endif %}>
-                                    <td>{{ task.name }}</td>
-                                    {% if not task.date_complete %}
-                                        <td>{{ task.deadline|date:"d M Y H:i" }}</td>
-                                    {% else %}
-                                        <td>{{ task.date_complete|date:"d M Y H:i" }}</td>
-                                    {% endif %}
-                                </tr>
-                                <tr class="panel">
-                                    <td colspan="2">
-                                        <p>{{ task.description|linebreaks }}</p>
-                                        {% if task.date_complete is None %}
-                                              <a href="{% url 'purposes:task_edit' task.pk %}">
-                                                  изменить задачу
-                                              </a>
-                                              <a href="{% url 'purposes:task_delete' task.pk %}">удалить</a>
-                                              <button type="submit" class="button-click"><a href="{% url 'purposes:task_complete' task.pk %}">Выполнил</a></button>
-                                        {% endif %}
-                                    </td>
-                                </tr>
-                                {% endif %}
-                            {% endfor %}
-                            {% include 'purposes/includes/paginator.html' %}
-                        </table>
-                        {% endif %}
-                </div>-->
             </td>
         </tr>
       {% endfor %}

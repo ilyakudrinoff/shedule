@@ -4,61 +4,78 @@
 {% endblock %}
 {% block content %}
 {% include 'includes/postheader.html' %}
-<h2>{{ contact.last_name }} {{ contact.name }}</h2>
-<img src="{{ contact.photo }}"/>
+<h2>{{ contact.last_name }} {{ contact.name }} (обновлено: {{ contact.updated_at }})</h2>
 <div>
-    <a href="{% url 'contacts:contact_edit' contact.pk %}">Изменить контакт</a>
-    <a href="{% url 'contacts:contact_delete' contact.pk %}">Удалить контакт</a>
-</div>
-<table>
-          <tr><th>Основная информация</th></tr>
-          <tr><td><b>Какую роль выполняет: </b>{{ contact.status }}</td></tr>
-          <tr><td><b>Круг в сети контактов: </b>{{ contact.krug }}</td></tr>
-          <tr><td><b>Занимаемый сектор: </b>{{ contact.sector }}</td></tr>
-          <tr><td><b>Основная информация: </b>{{ contact.first_info }}</td></tr>
-
-</table>
-<div>
-    <a href="{% url 'contacts:relationship_create' contact.pk %}">Создать отношения</a>
-    <a href="{% url 'contacts:relationship_edit' rship.pk %}">Изменить оценку</a>
-</div>
+    <img src="{{ contact.photo.url }}" class="img-list"/>
     <table>
+              <tr><th>Основная информация</th></tr>
+              <tr><td><b>Какую роль выполняет: </b>{{ contact.status }}</td></tr>
+              <tr><td><b>Круг в сети контактов: </b>{{ contact.krug }}</td></tr>
+              <tr><td><b>Занимаемый сектор: </b>{{ contact.sector }}</td></tr>
+              <tr><td><b>ОИС: </b>{{ contact.ois }}</td></tr>
+              <tr><td><b>Основная информация: </b>{{ contact.first_info }}</td></tr>
+    </table>
+</div>
+<a href="{% url 'contacts:contact_edit' contact.pk %}">Изменить контакт</a>
+<a href="{% url 'contacts:contact_delete' contact.pk %}">Удалить контакт</a>
+<a href="{% url 'contacts:relationship_edit' rship.pk %}" align="right">Изменить оценку поведения</a>
+<table>
         <tr>
-            <th>Поведение</th>
-            <th>Результат</th>
+            <th>Поведение (обновлено: {{ contact.updated_at }})</th>
+            <th>Оценка</th>
         </tr>
         <tr>
-            <td>{{ rship.commitment_intensity.label_tag }}</td>
+            <td><b>Приверженность и интенсивность</b></td>
             <td>{{ rship.commitment_intensity }}</td>
         </tr>
         <tr>
-            <td>{{ rship.initiative_reciprocity.label_tag }}</td>
+            <td><b>Инициатива и взаимность</b></td>
             <td>{{ rship.initiative_reciprocity }}</td>
         </tr>
         <tr>
-            <td>{{ rship.emotional_involment.label_tag }}</td>
+            <td><b>Эмоциональная вовлеченность</b></td>
             <td>{{ rship.emotional_involment }}</td>
         </tr>
         <tr>
-            <td>{{ rship.openness_trust.label_tag }}</td>
+            <td><b>Открытость и доверие</b></td>
             <td>{{ rship.openness_trust }}</td>
         </tr>
-    </table>
-
-<div>
-    <a href="{% url 'contacts:meets' contact.pk %}">Встречи</a>
-    <a href="{% url 'contacts:meet_create' contact.pk %}">Подготовить встречу</a>
-    {% for meet in meets %}
-        {{ meet.name }}
-        <a href="{% url 'contacts:meet_edit' meet.pk %}">Изменить встречу</a>
-    {% endfor %}
-</div>
-<div>
-    <a href="{% url 'contacts:facts' contact.pk %}">Факты</a>
-    <a href="{% url 'contacts:fact_create' contact.pk %}">Создать факт</a>
-    {% for fact in facts %}
-        {{ fact.fact }}
-        <a href="{% url 'contacts:fact_edit' fact.pk %}">Изменить факт</a>
-    {% endfor %}
-</div>
+</table>
+<a href="{% url 'contacts:meets' contact.pk %}" align="right">Все встречи</a>
+<a href="{% url 'contacts:meet_create' contact.pk %}" align="right">Подготовить встречу</a>
+<table>
+    <tr>
+        <th>{{ meet.name }} (обновлено: {{ contact.updated_at }}) - <a href="{% url 'contacts:meet_edit' meet.pk %}">Изменить встречу</a></th>
+    </tr>
+</table>
+<table>
+        <tr>
+            <th>Проблема</th>
+            <th>План</th>
+        </tr>
+        <tr>
+            <td><b>Что сделать для развития отношений</b></td>
+            <td>{{ meet.what_will_do }}</td>
+        </tr>
+        <tr>
+            <td><b>Как узнать больше о человеке</b></td>
+            <td>{{ meet.how_know_about }}</td>
+        </tr>
+        <tr>
+            <td><b>Что я могу дать</b></td>
+            <td>{{ meet.what_will_give }}</td>
+        </tr>
+        <tr>
+            <td><b>Что я могу попросить</b></td>
+            <td>{{ meet.what_will_get }}</td>
+        </tr>
+        <tr>
+            <td><b>Как обеспечить следующую встречу</b></td>
+            <td>{{ meet.how_next_meet }}</td>
+        </tr>
+</table>
+<table>
+        <tr><th>Результат</th></tr>
+        <tr><td>{{ meet.result }}</td></tr>
+</table>
 {% endblock %}

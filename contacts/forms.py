@@ -14,8 +14,10 @@ class ContactsForm(forms.ModelForm):
 class PremeetingForm(forms.ModelForm):
     class Meta:
         model = PreMeeting
-        fields = ('name', 'problem', 'plan', 'result',)
-        labels = {'name': 'Имя встречи', 'problem': 'Проблема', 'plan': 'План развития отношений',
+        fields = ('name', 'what_will_do', 'how_know_about', 'what_will_give', 'what_will_get', 'how_next_meet', 'result',)
+        labels = {'name': 'Имя встречи', 'what_will_do': 'Что сделать для развития отношений',
+                  'how_know_about': 'Как узнать больше о человеке', 'what_will_give': 'Что я могу дать',
+                  'what_will_get': 'Что я могу попросить', 'how_next_meet': 'Как обеспечить следующую встречу',
                   'result': 'Результат встречи'}
 
 

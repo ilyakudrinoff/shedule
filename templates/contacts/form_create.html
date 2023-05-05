@@ -5,11 +5,12 @@
 {% block content %}
 {% include 'includes/postheader.html' %}
 {% if contact_pk %}
+<div class="plan">
 <form method="post" action="{% url link contact_pk %}" class="form-action" enctype="multipart/form-data">
     {% csrf_token %}
     {% for i in form %}
         <b>{{ i.label_tag }}</b>
-        {{ i }}
+        <div>{{ i }}</div>
     {% endfor %}
     <button type="submit" class="button-click">Сохранить</button>
 </form>
@@ -18,9 +19,10 @@
     {% csrf_token %}
     {% for i in form %}
         <b>{{ i.label_tag }}</b>
-        {{ i }}
+        <div>{{ i }}</div>
     {% endfor %}
     <button type="submit" class="button-click">Сохранить</button>
 </form>
 {% endif %}
+</div>
 {% endblock %}

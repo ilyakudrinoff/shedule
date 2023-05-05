@@ -4,5 +4,16 @@
 {% endblock %}
 {% block content %}
 {% include 'includes/postheader.html' %}
-
+<h2>Встречи с {{ contact.last_name }} {{ contact.name }}</h2>
+<a href="{% url 'contacts:meet_create' contact.pk %}" align="right">Подготовить встречу</a>
+<table>
+    {% for meet in meets %}
+        <tr><td><b>{{meet.name}} ({{ meet.updated_at }}) - <a href="{% url 'contacts:meet_edit' meet.pk %}">Изменить встречу</a></b></td></tr>
+        {% if meet.result %}
+            <tr><td>{{meet.result}}</td></tr>
+        {% else %}
+            <tr><td>Встреча еще не состоялась</td></tr>
+        {% endif %}
+{% endfor %}
+</table>
 {% endblock %}

@@ -72,19 +72,13 @@ class Contacts(TimeStampedModel):
         return f'{self.name}'
 
 
-PROBLEMS_MEET = (
-    ('Что сделать для развития отношений', 'Что сделать для развития отношений'),
-    ('Как узнать больше о человеке', 'Как узнать больше о человеке'),
-    ('Что я могу дать', 'Что я могу дать'),
-    ('Что я могу попросить', 'Что я могу попросить'),
-    ('Как обеспечить следующую встречу', 'Как обеспечить следующую встречу'),
-)
-
-
 class PreMeeting(TimeStampedModel):
     name = models.CharField('Имя встречи', max_length=50)
-    problem = models.CharField('Проблемы', choices=PROBLEMS_MEET, max_length=50)
-    plan = models.TextField('План развития отношений')
+    what_will_do = models.TextField('Что сделать для развития отношений')
+    how_know_about = models.TextField('Как узнать больше о человеке')
+    what_will_give = models.TextField('Что я могу дать')
+    what_will_get = models.TextField('Что я могу попросить')
+    how_next_meet = models.TextField('Как обеспечить следующую встречу')
     result = models.TextField('Результат встречи', blank=True, null=True)
     contact = models.ForeignKey(Contacts, on_delete=models.CASCADE, related_name='meet_contact', verbose_name='Контакт')
 
@@ -106,10 +100,10 @@ POVEDENIE = (
 
 
 class Relationship(TimeStampedModel):
-    commitment_intensity = models.CharField(choices=MARKS, max_length=2)
-    initiative_reciprocity = models.CharField(choices=MARKS, max_length=2)
-    emotional_involment = models.CharField(choices=MARKS, max_length=2)
-    openness_trust = models.CharField(choices=MARKS, max_length=2)
+    commitment_intensity = models.CharField('Приверженность и интенсивность', choices=MARKS, max_length=2)
+    initiative_reciprocity = models.CharField('Инициатива и взаимность', choices=MARKS, max_length=2)
+    emotional_involment = models.CharField('Эмоциональная вовлеченность', choices=MARKS, max_length=2)
+    openness_trust = models.CharField('Открытость и доверие', choices=MARKS, max_length=2)
     contact = models.ForeignKey(Contacts, on_delete=models.CASCADE, related_name='ship_contact', verbose_name='Контакт')
 
     class Meta:
