@@ -7,5 +7,5 @@ class PurposesForm(forms.ModelForm):
     class Meta:
         model = Purposes
         fields = ('name', 'description', 'deadline',)
-        labels = {'name': 'Цель', 'description': 'Описание', 'Deadline': 'Дедлайн', }
+        labels = {'name': 'Задача', 'description': 'Описание', 'Deadline': 'Дедлайн', }
         widgets = {'deadline': forms.DateInput(attrs={'type': 'datetime-local'})}

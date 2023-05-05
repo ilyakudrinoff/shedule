@@ -18,7 +18,7 @@
 </div>
 </form>
     <div class="create_purpose">
-        <a href="{% url 'purposes:purpose_create' %}">Создать Цель</a>
+        <a href="{% url 'purposes:purpose_create' %}">Создать задачу</a>
     </div>
 
     <table>
@@ -40,7 +40,7 @@
                     <div><p>{{ purpose.description }}</p></div>
                     <div class="current">
                         {% if purpose.date_complete is None %}
-                            <a href="{% url 'purposes:purpose_edit' purpose.pk %}">изменить цель</a>
+                            <a href="{% url 'purposes:purpose_edit' purpose.pk %}">изменить задачу</a>
                             <button type="submit" class="button-click"><a href="{% url 'purposes:purpose_complete' purpose.pk %}">Выполнил</a></button>
                         {% else %}
                             <b>Выполнено:</b>
